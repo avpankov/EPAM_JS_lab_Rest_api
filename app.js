@@ -11,11 +11,9 @@ const dbPath = 'db.json';
 
 // GET
 app.get('/api/contacts', (req, res) => {
-    setTimeout(() => {
-        const content = fs.readFileSync(dbPath, 'utf8');
-        const contacts = JSON.parse(content);
-        res.status(200).send(contacts);
-    }, 1000)
+    const content = fs.readFileSync(dbPath, 'utf8');
+    const contacts = JSON.parse(content);
+    res.status(200).send(contacts);
 })
 
 // POST
@@ -46,14 +44,13 @@ app.post('/api/contacts', jsonParser, (req, res) => {
     data = JSON.stringify(contacts);
     fs.writeFileSync('db.json', data);
     res.send(contact);
-
 })
 
 // PUT
 app.put('/api/contacts', jsonParser, (req, res) => {
 
     if (!req.body) return res.sendStatus(400);
-    
+
     const id = req.body.id;
     const marked = req.body.marked;
     let data = fs.readFileSync(dbPath, 'utf8');

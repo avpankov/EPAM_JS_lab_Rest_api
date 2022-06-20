@@ -23,11 +23,11 @@ async function getContacts() {
         }
     });
     if (response.ok === true) {
-        document.querySelector('.spinner-border').style.display = 'none';
-        cardsContainer.style.display = 'flex';
-
+        setTimeout(() => {
+            document.querySelector('.spinner-border').style.display = 'none';
+            cardsContainer.style.display = 'flex';
+        }, 1000);
         const contacts = await response.json();
-        console.log(contacts);
         if (!contacts.length) {
             no_contacts_info.style.display = 'block';
         } else {
@@ -89,14 +89,14 @@ async function deleteContact(id) {
         let card = document.querySelector(`div[data-card-id='${contact.id}']`);
         card.parentElement.remove();
     }
-    const response2 = await fetch('/api/contacts', {
+    const updatedGetResponse = await fetch('/api/contacts', {
         method: 'GET',
         headers: {
             'Accept': 'application/json'
         }
     });
-    if (response2.ok === true) {
-        const contacts = await response2.json();
+    if (updatedGetResponse.ok === true) {
+        const contacts = await updatedGetResponse.json();
         if (!contacts.length) {
             no_contacts_info.style.display = 'block';
         }
