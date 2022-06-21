@@ -71,7 +71,6 @@ app.put('/api/contacts', jsonParser, (req, res) => {
     } else {
         res.status(404).send(contact);
     }
-
 })
 
 // DELETE
