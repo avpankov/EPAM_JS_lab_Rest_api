@@ -16,7 +16,7 @@ document.forms['contactForm'].addEventListener('submit', e => {
 async function getContacts() {
     cardsContainer.style.display = 'none';
     document.querySelector('.spinner-border').style.display = 'block';
-    const response = await fetch('/api/contacts', {
+    const response = await fetch('/dev/api/contacts', {
         method: 'GET',
         headers: {
             'Accept': 'application/json'
@@ -37,7 +37,7 @@ async function getContacts() {
 }
 
 async function createContact(name, tel, marked) {
-    const response = await fetch('/api/contacts', {
+    const response = await fetch('/dev/api/contacts', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -60,7 +60,7 @@ async function createContact(name, tel, marked) {
 async function markContact(id) {
     const contact = document.querySelector(`div[data-card-id='${id}']`);
     let marked = contact.classList.contains('border-primary') ? true : false;
-    const response = await fetch(`/api/contacts`, {
+    const response = await fetch(`/dev/api/contacts`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -78,7 +78,7 @@ async function markContact(id) {
 }
 
 async function deleteContact(id) {
-    const response = await fetch(`/api/contacts/${id}`, {
+    const response = await fetch(`/dev/api/contacts/${id}`, {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json'
@@ -89,7 +89,7 @@ async function deleteContact(id) {
         let card = document.querySelector(`div[data-card-id='${contact.id}']`);
         card.parentElement.remove();
     }
-    const updatedGetResponse = await fetch('/api/contacts', {
+    const updatedGetResponse = await fetch('/dev/api/contacts', {
         method: 'GET',
         headers: {
             'Accept': 'application/json'
